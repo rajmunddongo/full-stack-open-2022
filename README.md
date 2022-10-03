@@ -5,4 +5,4 @@ I challenged myself to learn new things such as
   * React
   * JavaScript
   * TypeScript
-  * github test
+  * github test2

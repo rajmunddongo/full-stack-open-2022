@@ -1,18 +1,38 @@
 import { useState } from 'react'
 
+const StatisticLine = (props) =>{
+  if(props.text=="positive"){
+    return(
+      <div>
+      <p>{props.text} {props.value}%</p>
+    </div>
+    )
+  }
+  return(
+    <div>
+      <p>{props.text} {props.value}</p>
+    </div>
+  )
+}
+const Button = (props) =>{
+
+  return(
+    
+      <button onClick={props.func}>{props.text}</button>
+    
+  )
+}
+
 const Statistics = (props) => {
   const all = props.bad + props.neutral + props.good
   return (
     <div>
-      <p>
-        all {all}
-      </p>
-      <p>
-        average {(props.bad * -1 + props.good) / (props.bad + props.neutral + props.good)}
-      </p>
-      <p>
-        positive {props.good / (props.bad + props.neutral + props.good)}%
-      </p>
+      <StatisticLine text="good" value ={props.good}/>
+      <StatisticLine text="neutral" value ={props.neutral}/>
+      <StatisticLine text="bad" value ={props.bad}/>
+      <StatisticLine text="all" value ={all}/>
+      <StatisticLine text="average" value ={(props.bad * -1 + props.good) / (props.bad + props.neutral + props.good)}/>
+      <StatisticLine text="positive" value ={props.good / (props.bad + props.neutral + props.good)}/>
     </div>
   )
 }
@@ -38,15 +58,9 @@ const App = () => {
         <h1>
           give feedback
         </h1>
-        <button onClick={setToGood}>
-          good
-        </button>
-        <button onClick={setToNeutral}>
-          neutral
-        </button>
-        <button onClick={setToBad}>
-          bad
-        </button>
+      <Button func={setToGood} text='good'></Button>
+      <Button func={setToNeutral} text='neutral'></Button>
+      <Button func={setToBad} text='bad'></Button>
         <p>No feedback given.</p>
       </div>
     )
@@ -57,27 +71,12 @@ const App = () => {
       <h1>
         give feedback
       </h1>
-      <button onClick={setToGood}>
-        good
-      </button>
-      <button onClick={setToNeutral}>
-        neutral
-      </button>
-      <button onClick={setToBad}>
-        bad
-      </button>
+      <Button func={setToGood} text='good'></Button>
+      <Button func={setToNeutral} text='neutral'></Button>
+      <Button func={setToBad} text='bad'></Button>
       <h1>
         statistics
       </h1>
-      <p>
-        good {good}
-      </p>
-      <p>
-        neutral {neutral}
-      </p>
-      <p>
-        bad {bad}
-      </p>
       <Statistics bad={bad} neutral={neutral} good={good}></Statistics>
     </div>
   )
